@@ -16,16 +16,16 @@ function clean {
 
 function compile {
 	mkdir -p $BUILDDIR
-	bsc -u -sim +RTS -K1024M -RTS -aggressive-conditions -no-warn-action-shadowing -parallel-sim-link 8 -warn-scheduler-effort -simdir $BUILDDIR -info-dir $BUILDDIR -bdir $BUILDDIR -p +:$INCLUDES ./testbenches/TestBench.bsv
-	bsc -u -sim -e mkTestBench +RTS -K1024M -RTS -bdir $BUILDDIR -info-dir $BUILDDIR -simdir $BUILDDIR -warn-scheduler-effort -parallel-sim-link 8 -Xc++ -O0 -o sim 
+	bsc -u -sim +RTS -K1024M -RTS -aggressive-conditions -no-warn-action-shadowing -parallel-sim-link 8 -simdir $BUILDDIR -info-dir $BUILDDIR -bdir $BUILDDIR -p +:$INCLUDES ./testbenches/TestBench.bsv
+	bsc -u -sim -e mkTestBench +RTS -K1024M -RTS -bdir $BUILDDIR -info-dir $BUILDDIR -simdir $BUILDDIR -parallel-sim-link 8 -Xc++ -O0 -o sim 
 	mv sim $BUILDDIR
 	mv sim.so $BUILDDIR
 }
 
 function compile_arg {
 	mkdir -p $BUILDDIR
-	bsc -u -D $1 -sim +RTS -K1024M -RTS -aggressive-conditions -no-warn-action-shadowing -parallel-sim-link 8 -warn-scheduler-effort -simdir $BUILDDIR -info-dir $BUILDDIR -bdir $BUILDDIR -p +:$INCLUDES ./testbenches/TestBench.bsv
-	bsc -u -D $1 -sim -e mkTestBench +RTS -K1024M -RTS -bdir $BUILDDIR -info-dir $BUILDDIR -simdir $BUILDDIR -warn-scheduler-effort -parallel-sim-link 8 -Xc++ -O0 -o sim 
+	bsc -u -D $1 -sim +RTS -K1024M -RTS -aggressive-conditions -no-warn-action-shadowing -parallel-sim-link 8 -simdir $BUILDDIR -info-dir $BUILDDIR -bdir $BUILDDIR -p +:$INCLUDES ./testbenches/TestBench.bsv
+	bsc -u -D $1 -sim -e mkTestBench +RTS -K1024M -RTS -bdir $BUILDDIR -info-dir $BUILDDIR -simdir $BUILDDIR -parallel-sim-link 8 -Xc++ -O0 -o sim 
 	mv sim $BUILDDIR
 	mv sim.so $BUILDDIR
 }
